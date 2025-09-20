@@ -16,8 +16,8 @@ Overview ->
            Target: SalePrice (House Price)
 
 
-🔎 Workflow ->
-             Data Collection & Cleaning
+🔎 Workflow ->             
+            Data Collection & Cleaning
 
              Exploratory Data Analysis (EDA)
 
@@ -28,4 +28,33 @@ Overview ->
              Model Evaluation – RMSE, R² Score
 
              Insights & Prediction Results
+
+
+
+🚀 How to Run ->
+# Clone this repository
+git clone https://github.com/yourusername/house_price_prediction.git
+
+# Navigate into the folder
+cd house_price_prediction
+
+# Run Jupyter Notebook
+jupyter notebook house_price_prediction.ipynb
+
+
+
+👩‍💻 Author
+Neha Nagar
+github -> nagarneha 
+
+
+🛠️ Tools ->
+           Python 
+           pandas 
+           numpy 
+           matplotlib 
+           seaborn
+           scikit-learn 
+           xgboost
+
 
