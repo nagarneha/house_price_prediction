@@ -93,3 +93,83 @@ st.plotly_chart(fig)
 fig = px.box(df, x="city", y="price")
 st.plotly_chart(fig)
 
+
+
+
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import pickle
+
+# -----------------------------
+# Load Model & Data
+# -----------------------------
+df = pd.read_csv("cleaned_data.csv")  # apna data file
+model = pickle.load(open("model.pkl", "rb"))
+
+st.title("🏡 House Price Prediction App")
+
+# -----------------------------
+# Sidebar Filters
+# -----------------------------
+st.sidebar.header("🔍 Filters")
+
+# 1. Neighborhood Filter
+neighborhood_list = df["Neighborhood"].unique()
+selected_neighborhood = st.sidebar.multiselect(
+    "Select Neighborhood",
+    options=neighborhood_list,
+    default=neighborhood_list
+)
+
+# 2. House Style Filter
+house_style_list = df["HouseStyle"].unique()
+selected_house_style = st.sidebar.multiselect(
+    "Select House Style",
+    options=house_style_list,
+    default=house_style_list
+)
+
+# 3. Price Range Slider
+min_price = int(df["SalePrice"].min())
+max_price = int(df["SalePrice"].max())
+
+price_range = st.sidebar.slider(
+    "Select Price Range",
+    min_price, max_price, (min_price, max_price)
+)
+
+# 4. Year Built Range Filter
+min_year = int(df["YearBuilt"].min())
+max_year = int(df["YearBuilt"].max())
+
+year_range = st.sidebar.slider(
+    "Year Built Range",
+    min_year, max_year, (min_year, max_year)
+)
+
+# -----------------------------
+# Filter Data Based on Sidebar
+# -----------------------------
+filtered_df = df[
+    (df["Neighborhood"].isin(selected_neighborhood)) &
+    (df["HouseStyle"].isin(selected_house_style)) &
+    (df["SalePrice"].between(price_range[0], price_range[1])) &
+    (df["YearBuilt"].between(year_range[0], year_range[1]))
+]
+
+# -----------------------------
+# Show Filtered Table
+# -----------------------------
+st.subheader("📋 Filtered Dataset")
+st.dataframe(filtered_df)
+
+# -----------------------------
+# Chart (Auto-Refresh)
+# -----------------------------
+st.subheader("📊 Price Distribution (Filtered)")
+fig = px.histogram(filtered_df, x="SalePrice", nbins=40)
+st.plotly_chart(fig)
+
+
+ 
