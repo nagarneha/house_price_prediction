@@ -248,7 +248,7 @@ except Exception as e:
     st.stop()
 
 # Show columns (for debugging) — comment out in production if you want
-st.write("**Loaded columns:**", list(df.columns))
+#st.write("**Loaded columns:**", list(df.columns))
 
 # -----------------------------
 # Standardize column names once
@@ -379,7 +379,7 @@ else:
     st.write("No numeric columns to display correlation.")
 
 st.subheader("📋 Filtered Dataset")
-st.dataframe(filtered_df)
+#st.dataframe(filtered_df)
 
 # -----------------------------
 # Model Prediction (best-effort)
